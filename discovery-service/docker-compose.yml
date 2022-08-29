@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  discovery-service:
+    image: 'discovery-service:latest'
+    depends_on:
+      - config-service
+    networks:
+      - providers_config
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: discovery-service
+    hostname: discovery-service
+    ports:
+      - "8761:8761"
+
+networks:
+  providers_config:
+    external:
+      name: providers_config
